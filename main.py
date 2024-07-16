@@ -21,9 +21,9 @@ async def scan_and_connect(device_data):
                     battery_percentage = int.from_bytes(battery_level, byteorder='little')
                     print(f"Connected to {device.name}, Battery level: {battery_percentage}%")
                     device_info['successful_battery_reads'] += 1
-                except BleakError as e:
+                except (BleakError, asyncio.exceptions.TimeoutError, asyncio.exceptions.CancelledError, EOFError) as e:
                     print(f"Connected to {device.name}, but failed to read battery level: {e}")
-        except (BleakError, asyncio.exceptions.TimeoutError, asyncio.exceptions.CancelledError) as e:
+        except (BleakError, asyncio.exceptions.TimeoutError, asyncio.exceptions.CancelledError, EOFError) as e:
             print(f"Failed to connect to {device.name}: {e}")
 
 async def main():
