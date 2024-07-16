@@ -11,7 +11,8 @@ else
 fi
 
 # Execute the Python script
-python polar_HRM.py
+python main.py
 
 # Keep the container running
-#balena-idle
+balena-idle
+
